@@ -3,6 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Rate my Backend</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
             box-sizing: border-box
@@ -19,10 +20,11 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #4e4e4e;
             overflow-x: hidden;
+            margin: 0 auto;
+            max-width: 1080px;
         }
 
         h1 {
-            width: 100%;
             text-align: center;
             margin: 2rem;
         }
@@ -39,13 +41,14 @@
 
         .item {
             width: 100%;
-            height: 3rem;
+            min-height: 3rem;
             background-color: #f5f5f5;
             position: relative;
+            border-bottom: .05rem solid #ddd;
         }
 
         .item:hover {
-            background-color: #fff;
+            background-color: #fdfdfd;
         }
 
         .item:hover,
@@ -55,7 +58,6 @@
         }
 
         .item-checkbox {
-            height: 100%;
             width: 7rem;
             text-align: center;
             display: block;
@@ -63,20 +65,21 @@
         }
 
         .item-checkbox input {
-            height: 100%;
+            min-height: 3rem;
             margin: 0;
         }
 
         .item label {
-            width: 100%;
-            height: 100%;
-            display: inline-block;
-            line-height: 3;
-            padding-left: 8rem;
             text-align: left;
             position: absolute;
             top: 0;
             left: 0;
+            padding: .2rem .2rem .2rem 8rem;
+        }
+
+        .item-description {
+            display: block;
+            color: #bbb;
         }
 
         .item.checked .item-checkbox {
@@ -120,173 +123,230 @@
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="mon0" id="mon0" value="5">
                 </div>
-                <label for="mon0">Load balancing monitoring</label>
+                <label for="mon0">Load balancing monitoring
+                    <span class="item-description">Here a very good description and what if I write a very very long description on multiple big big lines???</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_mon1">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="mon1" id="mon1" value="3">
                 </div>
-                <label for="mon1">Per API endpoint response time</label>
+                <label for="mon1">Per API endpoint response time
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_mon2">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="mon2" id="mon2" value="3">
                 </div>
-                <label for="mon2">Per server resources monitoring (CPU, RAM, Disk Space, etc…)</label>
+                <label for="mon2">Per server resources monitoring (CPU, RAM, Disk Space, etc…)
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item" id="item_mon3">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="mon3" id="mon3" value="1">
                 </div>
-                <label for="mon3">Setup alerts for all previous points</label>
+                <label for="mon3">Setup alerts for all previous points
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item" id="item_mon4">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="mon4" id="mon4" value="1">
                 </div>
-                <label for="mon4">Use asynchronous logging in code</label>
+                <label for="mon4">Use asynchronous logging in code
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <h2>Security</h2>
             <div class="item mandatory" id="item_sec0">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="sec0" id="sec0" value="5">
                 </div>
-                <label for="sec0">User’s input sanitization</label>
+                <label for="sec0">User’s input sanitization
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_sec1">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="sec1" id="sec1" value="5">
                 </div>
-                <label for="sec1">Do not store plain text password</label>
+                <label for="sec1">Do not store plain text password
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_sec2">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="sec2" id="sec2" value="3">
                 </div>
-                <label for="sec2">Per API endpoint throttling (mainly login, file uploading, etc…)</label>
+                <label for="sec2">Per API endpoint throttling (mainly login, file uploading, etc…)
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_sec3">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="sec3" id="sec3" value="3">
                 </div>
-                <label for="sec3">Prefer using BCrypt to hash password</label>
+                <label for="sec3">Prefer using BCrypt to hash password
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <h2>Performance optimization</h2>
             <div class="item mandatory" id="item_perf0">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="perf0" id="perf0" value="5">
                 </div>
-                <label for="perf0">Database indexes</label>
+                <label for="perf0">Database indexes
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_perf1">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="perf1" id="perf1" value="5">
                 </div>
-                <label for="perf1">Code Profiling to track down memory leaks</label>
+                <label for="perf1">Code Profiling to track down memory leaks
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_perf2">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="perf2" id="perf2" value="5">
                 </div>
-                <label for="perf2">Use NGinX or Varnish to cache static API requests (not logged users)</label>
+                <label for="perf2">Use NGinX or Varnish to cache static API requests (not logged users)
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_perf3">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="perf3" id="perf3" value="5">
                 </div>
-                <label for="perf3">Use Redis to cache dynamic API requests (logged users)</label>
+                <label for="perf3">Use Redis to cache dynamic API requests (logged users)
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_perf4">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="perf4" id="perf4" value="3">
                 </div>
-                <label for="perf4">Use of Redis, no read should be done to the database directly</label>
+                <label for="perf4">Use of Redis, no read should be done to the database directly
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item" id="item_perf5">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="perf5" id="perf5" value="1">
                 </div>
-                <label for="perf5">Use CDN to serve static files</label>
+                <label for="perf5">Use CDN to serve static files
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <h2>Industrialization</h2>
             <div class="item mandatory" id="item_indus0">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="indus0" id="indus0" value="5">
                 </div>
-                <label for="indus0">API Versionning should be carefully handled</label>
+                <label for="indus0">API Versionning should be carefully handled
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_indus1">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="indus1" id="indus1" value="5">
                 </div>
-                <label for="indus1">New versions should be packaged from Continuous Integration</label>
+                <label for="indus1">New versions should be packaged from Continuous Integration
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_indus2">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="indus2" id="indus2" value="5">
                 </div>
-                <label for="indus2">Use of GIT (or mercurial)</label>
+                <label for="indus2">Use of GIT (or mercurial)
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_indus3">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="indus3" id="indus3" value="5">
                 </div>
-                <label for="indus3">Database versionning should be handled carefully (applying updates or rollbacking versions should be handled)</label>
+                <label for="indus3">Database versionning should be handled carefully (applying updates or rollbacking versions should be handled)
+                    <span
+                        class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_indus4">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="indus4" id="indus4" value="5">
                 </div>
-                <label for="indus4">API should be 100% tested with unit tests</label>
+                <label for="indus4">API should be 100% tested with unit tests
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_indus5">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="indus5" id="indus5" value="3">
                 </div>
-                <label for="indus5">The whole solution should be easy to install and deploy</label>
+                <label for="indus5">The whole solution should be easy to install and deploy
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_indus6">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="indus6" id="indus6" value="3">
                 </div>
-                <label for="indus6">Application should support Docker</label>
+                <label for="indus6">Application should support Docker
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_indus7">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="indus7" id="indus7" value="3">
                 </div>
-                <label for="indus7">Each version should be easy to rebuild and redeploy (for emergency fixes or to debug locally)</label>
+                <label for="indus7">Each version should be easy to rebuild and redeploy (for emergency fixes or to debug locally)
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <h2>Deploy</h2>
             <div class="item mandatory" id="item_dep0">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="dep0" id="dep0" value="5">
                 </div>
-                <label for="dep0">Every deploy should have a changelog</label>
+                <label for="dep0">Every deploy should have a changelog
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_dep1">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="dep1" id="dep1" value="5">
                 </div>
-                <label for="dep1">Documentation</label>
+                <label for="dep1">Documentation
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_dep2">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="dep2" id="dep2" value="5">
                 </div>
-                <label for="dep2">Database should be backuped and restore procedure should be tested</label>
+                <label for="dep2">Database should be backuped and restore procedure should be tested
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item mandatory" id="item_dep3">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="dep3" id="dep3" value="5">
                 </div>
-                <label for="dep3">Swagger up-to-date with meaningfull examples</label>
+                <label for="dep3">Swagger up-to-date with meaningfull examples
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
             <div class="item recommanded" id="item_dep4">
                 <div class="item-checkbox">
                     <input type="checkbox" onchange="handleChecking(event)" name="dep4" id="dep4" value="3">
                 </div>
-                <label for="dep4">Application rollback procedure written and tested for each deploy</label>
+                <label for="dep4">Application rollback procedure written and tested for each deploy
+                    <span class="item-description">undefined</span>
+                </label>
             </div>
         </div>
         <input type="submit" value="Rate my backend">
@@ -321,7 +381,6 @@
             }
         }
     </script>
-
 </body>
 
 </html>
