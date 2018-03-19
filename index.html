@@ -1,0 +1,331 @@
+<html>
+
+<head>
+    <title>Rate my Backend</title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #4e4e4e;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            margin: 2rem;
+        }
+
+        h2 {
+            padding-left: 1rem;
+            text-align: left;
+        }
+
+        .main-description {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .item {
+            width: 100%;
+            height: 3rem;
+            background-color: #f5f5f5;
+            position: relative;
+        }
+
+        .item:hover {
+            background-color: #fff;
+        }
+
+        .item:hover,
+        .item:hover label,
+        input[type=submit]:hover {
+            cursor: pointer;
+        }
+
+        .item-checkbox {
+            height: 100%;
+            width: 7rem;
+            text-align: center;
+            display: block;
+            background-color: #ffff6a;
+        }
+
+        .item-checkbox input {
+            height: 100%;
+            margin: 0;
+        }
+
+        .item label {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            line-height: 3;
+            padding-left: 8rem;
+            text-align: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .item.checked .item-checkbox {
+            background-color: #2cdc2c !important;
+        }
+
+        .item.mandatory .item-checkbox {
+            background-color: #f44;
+        }
+
+        .item.recommanded .item-checkbox {
+            background-color: #ffbd43;
+        }
+
+        input[type=submit] {
+            margin: 2rem;
+            border: 1px solid #666;
+            padding: 1rem;
+            background-color: #f0fff0;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input[type=submit]:hover {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rate my Backend</h1>
+    <p class="main-description">
+        If your CTO thinks its latest architecture is awesome and you don't know how to tell hime it's not, if you are a frontend
+        developer and want to check if your backend team is doing the right stuff, if you are a backend developer and want
+        to check if you are lacking some best practices, etc... Feel free to use this backend best practices checker ! Ratemyfrontend
+        is coming soon.</p>
+    <form onsubmit="submitForm(event)">
+        <div id="ratingItemsList" class="ratingItemsList"></div>
+        <input type="submit" value="Rate my backend" />
+    </form>
+
+    <script>
+        var maxScore = 110; //TODO
+
+        function submitForm(event) {
+            event.preventDefault();
+            var selectedItems = document.querySelectorAll('input[type="checkbox"]:checked');
+            var score = 0;
+            for (var k = 0; k < selectedItems.length; k++) {
+                score += parseInt(selectedItems[k].value);
+            }
+            var scorePercent = parseInt(score / maxScore * 100);
+            if (scorePercent >= 50) {
+                alert('You are good to go live!');
+            } else {
+                alert('Dude, this is not professional at all.');
+            }
+        }
+
+        function handleChecking(event) {
+            var selectedCheckbox = document.getElementById('item_' + event.target.name);
+            if (selectedCheckbox) {
+                if (event.target.checked) {
+                    selectedCheckbox.className += ' checked';
+                } else {
+                    selectedCheckbox.className = selectedCheckbox.className.replace(' checked', '');
+                }
+            }
+        }
+    </script>
+    <script class="to_remove">
+        var ITEM_LEVEL = {
+            MANDATORY: 5,
+            RECOMMANDED: 3,
+            NICE_TO_HAVE: 1
+        };
+
+        var ratingItems = [
+            {
+                label: 'Monitoring',
+                id: 'mon',
+                children: [
+                    {
+                        label: 'Load balancing monitoring',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Per API endpoint response time',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Per server resources monitoring (CPU, RAM, Disk Space, etc…)',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Setup alerts for all previous points',
+                        value: ITEM_LEVEL.NICE_TO_HAVE
+                    },
+                    {
+                        label: 'Use asynchronous logging in code',
+                        value: ITEM_LEVEL.NICE_TO_HAVE
+                    }
+                ]
+            },
+            {
+                label: 'Security',
+                id: 'sec',
+                children: [
+                    {
+                        label: 'User’s input sanitization',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Do not store plain text password',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Per API endpoint throttling (mainly login, file uploading, etc…)',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Prefer using BCrypt to hash password',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    }
+                ]
+            },
+            {
+                label: 'Performance optimization',
+                id: 'perf',
+                children: [
+                    {
+                        label: 'Database indexes',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Code Profiling to track down memory leaks',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Use NGinX or Varnish to cache static API requests (not logged users)',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Use Redis to cache dynamic API requests (logged users)',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Use of Redis, no read should be done to the database directly',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Use CDN to serve static files',
+                        value: ITEM_LEVEL.NICE_TO_HAVE
+                    }
+                ]
+            },
+            {
+                label: 'Industrialization',
+                id: 'indus',
+                children: [
+                    {
+                        label: 'API Versionning should be carefully handled',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'New versions should be packaged from Continuous Integration',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Use of GIT (or mercurial)',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Database versionning should be handled carefully (applying updates or rollbacking versions should be handled)',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'API should be 100% tested with unit tests',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'The whole solution should be easy to install and deploy',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Application should support Docker',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Each version should be easy to rebuild and redeploy (for emergency fixes or to debug locally)',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    }
+                ]
+            },
+            {
+                label: 'Deploy',
+                id: 'dep',
+                children: [
+                    {
+                        label: 'Every deploy should have a changelog',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Documentation',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Database should be backuped and restore procedure should be tested',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Swagger up-to-date with meaningfull examples',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Application rollback procedure written and tested for each deploy',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    }
+                ]
+            },
+        ];
+        var ratingItemsListElement = document.getElementById('ratingItemsList');
+        for (var i = 0; i < ratingItems.length; i++) {
+            var newCategoryTitle = document.createElement('h2');
+            newCategoryTitle.innerText = ratingItems[i].label;
+            ratingItemsListElement.appendChild(newCategoryTitle);
+            for (var j = 0; j < ratingItems[i].children.length; j++) {
+                var newRatingItem = document.createElement('div');
+                var currentId = ratingItems[i].id + j;
+                newRatingItem.className = 'item';
+                newRatingItem.id = 'item_' + currentId;
+                if (ratingItems[i].children[j].value === ITEM_LEVEL.MANDATORY) {
+                    newRatingItem.className += ' mandatory';
+                } else if (ratingItems[i].children[j].value === ITEM_LEVEL.RECOMMANDED) {
+                    newRatingItem.className += ' recommanded';
+                }
+                var newRatingItemCheckbox = document.createElement('div');
+                newRatingItemCheckbox.className = 'item-checkbox';
+                newRatingItemCheckbox.innerHTML = '<input type="checkbox" onchange="handleChecking(event)" name="' + currentId + '" id="' + currentId + '" value="' + ratingItems[i].children[j].value + '" />';
+                newRatingItem.appendChild(newRatingItemCheckbox);
+                var newRatingItemLabel = document.createElement('label');
+                newRatingItemLabel.setAttribute('for', currentId);
+                newRatingItemLabel.innerText = ratingItems[i].children[j].label;
+                newRatingItem.appendChild(newRatingItemLabel);
+                ratingItemsListElement.appendChild(newRatingItem);
+
+                maxScore += ratingItems[i].children[j].value;
+            }
+        }
+    </script>
+</body>
+
+</html>
