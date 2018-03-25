@@ -43,7 +43,7 @@
             min-height: 3rem;
             background-color: #f5f5f5;
             position: relative;
-            border-bottom: .05rem solid #ddd;
+            border-bottom: 2px solid #ddd;
         }
 
         .item:hover {
@@ -54,6 +54,22 @@
         .item:hover label,
         input[type=submit]:hover {
             cursor: pointer;
+        }
+
+        .item.opened {
+            display: table;
+        }
+
+        .item.opened .item-checkbox {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .item.opened label {
+            display: table-cell;
+            padding: .2rem .2rem .2rem 1rem;
+            position: relative;
+            width: calc(100% - 7rem);
         }
 
         .item-checkbox {
@@ -74,6 +90,7 @@
             top: 0;
             left: 0;
             padding: .2rem .2rem .2rem 8rem;
+            width: 100%;
         }
 
         .item-description {
@@ -104,6 +121,23 @@
 
         input[type=submit]:hover {
             background-color: #fff;
+        }
+
+        .item-opener {
+            float: right;
+            border-radius: 2rem;
+            width: 2rem;
+            height: 2rem;
+            background-color: #2cdc2c;
+            color: #fff;
+            text-align: center;
+            line-height: 2rem;
+            margin-top: .3rem;
+            transition: all .4s ease-out;
+        }
+
+        .item.opened .item-opener {
+            transform: rotateX(180deg);
         }
     </style>
 </head>
@@ -146,6 +180,16 @@
                 } else {
                     selectedCheckbox.className = selectedCheckbox.className.replace(' checked', '');
                 }
+            }
+        }
+
+        function openItem(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            if (event.target.parentNode.parentNode.className.indexOf('opened') > -1) {
+                event.target.parentNode.parentNode.className = event.target.parentNode.parentNode.className.replace(' opened', '')
+            } else {
+                event.target.parentNode.parentNode.className += ' opened';
             }
         }
     </script>
@@ -322,7 +366,7 @@
                 newRatingItem.appendChild(newRatingItemCheckbox);
                 var newRatingItemLabel = document.createElement('label');
                 newRatingItemLabel.setAttribute('for', currentId);
-                newRatingItemLabel.innerText = ratingItems[i].children[j].label;
+                newRatingItemLabel.innerHTML = '<div class="item-opener" onclick="openItem(event)">&darr;</div>' + ratingItems[i].children[j].label;
                 var newRatingItemDescription = document.createElement('span');
                 newRatingItemDescription.className = 'item-description';
                 newRatingItemDescription.innerText = ratingItems[i].children[j].description;

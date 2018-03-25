@@ -1,7 +1,6 @@
-<html>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- saved from url=(0071)file:///Users/bruno/dev/backend-best-practices/index.html?mon1=5&sec1=5 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Rate my Backend</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -44,7 +43,7 @@
             min-height: 3rem;
             background-color: #f5f5f5;
             position: relative;
-            border-bottom: .05rem solid #ddd;
+            border-bottom: 2px solid #ddd;
         }
 
         .item:hover {
@@ -55,6 +54,22 @@
         .item:hover label,
         input[type=submit]:hover {
             cursor: pointer;
+        }
+
+        .item.opened {
+            display: table;
+        }
+
+        .item.opened .item-checkbox {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .item.opened label {
+            display: table-cell;
+            padding: .2rem .2rem .2rem 1rem;
+            position: relative;
+            width: calc(100% - 7rem);
         }
 
         .item-checkbox {
@@ -75,6 +90,7 @@
             top: 0;
             left: 0;
             padding: .2rem .2rem .2rem 8rem;
+            width: 100%;
         }
 
         .item-description {
@@ -106,6 +122,23 @@
         input[type=submit]:hover {
             background-color: #fff;
         }
+
+        .item-opener {
+            float: right;
+            border-radius: 2rem;
+            width: 2rem;
+            height: 2rem;
+            background-color: #2cdc2c;
+            color: #fff;
+            text-align: center;
+            line-height: 2rem;
+            margin-top: .3rem;
+            transition: all .4s ease-out;
+        }
+
+        .item.opened .item-opener {
+            transform: rotateX(180deg);
+        }
     </style>
 </head>
 
@@ -117,238 +150,7 @@
         to check if you are lacking some best practices, etc... Feel free to use this backend best practices checker ! Ratemyfrontend
         is coming soon.</p>
     <form onsubmit="submitForm(event)">
-        <div id="ratingItemsList" class="ratingItemsList">
-            <h2>Monitoring</h2>
-            <div class="item mandatory" id="item_mon0">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="mon0" id="mon0" value="5">
-                </div>
-                <label for="mon0">Load balancing monitoring
-                    <span class="item-description">Here a very good description and what if I write a very very long description on multiple big big lines???</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_mon1">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="mon1" id="mon1" value="3">
-                </div>
-                <label for="mon1">Per API endpoint response time
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_mon2">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="mon2" id="mon2" value="3">
-                </div>
-                <label for="mon2">Per server resources monitoring (CPU, RAM, Disk Space, etc…)
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item" id="item_mon3">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="mon3" id="mon3" value="1">
-                </div>
-                <label for="mon3">Setup alerts for all previous points
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item" id="item_mon4">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="mon4" id="mon4" value="1">
-                </div>
-                <label for="mon4">Use asynchronous logging in code
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <h2>Security</h2>
-            <div class="item mandatory" id="item_sec0">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="sec0" id="sec0" value="5">
-                </div>
-                <label for="sec0">User’s input sanitization
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_sec1">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="sec1" id="sec1" value="5">
-                </div>
-                <label for="sec1">Do not store plain text password
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_sec2">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="sec2" id="sec2" value="3">
-                </div>
-                <label for="sec2">Per API endpoint throttling (mainly login, file uploading, etc…)
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_sec3">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="sec3" id="sec3" value="3">
-                </div>
-                <label for="sec3">Prefer using BCrypt to hash password
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <h2>Performance optimization</h2>
-            <div class="item mandatory" id="item_perf0">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="perf0" id="perf0" value="5">
-                </div>
-                <label for="perf0">Database indexes
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_perf1">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="perf1" id="perf1" value="5">
-                </div>
-                <label for="perf1">Code Profiling to track down memory leaks
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_perf2">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="perf2" id="perf2" value="5">
-                </div>
-                <label for="perf2">Use NGinX or Varnish to cache static API requests (not logged users)
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_perf3">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="perf3" id="perf3" value="5">
-                </div>
-                <label for="perf3">Use Redis to cache dynamic API requests (logged users)
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_perf4">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="perf4" id="perf4" value="3">
-                </div>
-                <label for="perf4">Use of Redis, no read should be done to the database directly
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item" id="item_perf5">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="perf5" id="perf5" value="1">
-                </div>
-                <label for="perf5">Use CDN to serve static files
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <h2>Industrialization</h2>
-            <div class="item mandatory" id="item_indus0">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="indus0" id="indus0" value="5">
-                </div>
-                <label for="indus0">API Versionning should be carefully handled
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_indus1">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="indus1" id="indus1" value="5">
-                </div>
-                <label for="indus1">New versions should be packaged from Continuous Integration
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_indus2">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="indus2" id="indus2" value="5">
-                </div>
-                <label for="indus2">Use of GIT (or mercurial)
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_indus3">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="indus3" id="indus3" value="5">
-                </div>
-                <label for="indus3">Database versionning should be handled carefully (applying updates or rollbacking versions should be handled)
-                    <span
-                        class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_indus4">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="indus4" id="indus4" value="5">
-                </div>
-                <label for="indus4">API should be 100% tested with unit tests
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_indus5">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="indus5" id="indus5" value="3">
-                </div>
-                <label for="indus5">The whole solution should be easy to install and deploy
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_indus6">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="indus6" id="indus6" value="3">
-                </div>
-                <label for="indus6">Application should support Docker
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_indus7">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="indus7" id="indus7" value="3">
-                </div>
-                <label for="indus7">Each version should be easy to rebuild and redeploy (for emergency fixes or to debug locally)
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <h2>Deploy</h2>
-            <div class="item mandatory" id="item_dep0">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="dep0" id="dep0" value="5">
-                </div>
-                <label for="dep0">Every deploy should have a changelog
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_dep1">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="dep1" id="dep1" value="5">
-                </div>
-                <label for="dep1">Documentation
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_dep2">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="dep2" id="dep2" value="5">
-                </div>
-                <label for="dep2">Database should be backuped and restore procedure should be tested
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item mandatory" id="item_dep3">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="dep3" id="dep3" value="5">
-                </div>
-                <label for="dep3">Swagger up-to-date with meaningfull examples
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-            <div class="item recommanded" id="item_dep4">
-                <div class="item-checkbox">
-                    <input type="checkbox" onchange="handleChecking(event)" name="dep4" id="dep4" value="3">
-                </div>
-                <label for="dep4">Application rollback procedure written and tested for each deploy
-                    <span class="item-description">undefined</span>
-                </label>
-            </div>
-        </div>
+        <div id="ratingItemsList" class="ratingItemsList"><h2>Monitoring</h2><div class="item mandatory checked" id="item_mon0"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="mon0" id="mon0" value="5"></div><label for="mon0"><div class="item-opener" onclick="openItem(event)">↓</div>Load balancing monitoring<span class="item-description">Here a very good description and what if I write a very very long description on multiple big big lines???</span></label></div><div class="item recommanded" id="item_mon1"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="mon1" id="mon1" value="3"></div><label for="mon1"><div class="item-opener" onclick="openItem(event)">↓</div>Per API endpoint response time<span class="item-description">undefined</span></label></div><div class="item recommanded" id="item_mon2"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="mon2" id="mon2" value="3"></div><label for="mon2"><div class="item-opener" onclick="openItem(event)">↓</div>Per server resources monitoring (CPU, RAM, Disk Space, etc…)<span class="item-description">undefined</span></label></div><div class="item" id="item_mon3"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="mon3" id="mon3" value="1"></div><label for="mon3"><div class="item-opener" onclick="openItem(event)">↓</div>Setup alerts for all previous points<span class="item-description">undefined</span></label></div><div class="item" id="item_mon4"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="mon4" id="mon4" value="1"></div><label for="mon4"><div class="item-opener" onclick="openItem(event)">↓</div>Use asynchronous logging in code<span class="item-description">undefined</span></label></div><h2>Security</h2><div class="item mandatory" id="item_sec0"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="sec0" id="sec0" value="5"></div><label for="sec0"><div class="item-opener" onclick="openItem(event)">↓</div>User’s input sanitization<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_sec1"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="sec1" id="sec1" value="5"></div><label for="sec1"><div class="item-opener" onclick="openItem(event)">↓</div>Do not store plain text password<span class="item-description">undefined</span></label></div><div class="item recommanded" id="item_sec2"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="sec2" id="sec2" value="3"></div><label for="sec2"><div class="item-opener" onclick="openItem(event)">↓</div>Per API endpoint throttling (mainly login, file uploading, etc…)<span class="item-description">undefined</span></label></div><div class="item recommanded" id="item_sec3"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="sec3" id="sec3" value="3"></div><label for="sec3"><div class="item-opener" onclick="openItem(event)">↓</div>Prefer using BCrypt to hash password<span class="item-description">undefined</span></label></div><h2>Performance optimization</h2><div class="item mandatory" id="item_perf0"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="perf0" id="perf0" value="5"></div><label for="perf0"><div class="item-opener" onclick="openItem(event)">↓</div>Database indexes<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_perf1"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="perf1" id="perf1" value="5"></div><label for="perf1"><div class="item-opener" onclick="openItem(event)">↓</div>Code Profiling to track down memory leaks<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_perf2"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="perf2" id="perf2" value="5"></div><label for="perf2"><div class="item-opener" onclick="openItem(event)">↓</div>Use NGinX or Varnish to cache static API requests (not logged users)<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_perf3"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="perf3" id="perf3" value="5"></div><label for="perf3"><div class="item-opener" onclick="openItem(event)">↓</div>Use Redis to cache dynamic API requests (logged users)<span class="item-description">undefined</span></label></div><div class="item recommanded" id="item_perf4"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="perf4" id="perf4" value="3"></div><label for="perf4"><div class="item-opener" onclick="openItem(event)">↓</div>Use of Redis, no read should be done to the database directly<span class="item-description">undefined</span></label></div><div class="item" id="item_perf5"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="perf5" id="perf5" value="1"></div><label for="perf5"><div class="item-opener" onclick="openItem(event)">↓</div>Use CDN to serve static files<span class="item-description">undefined</span></label></div><h2>Industrialization</h2><div class="item mandatory" id="item_indus0"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="indus0" id="indus0" value="5"></div><label for="indus0"><div class="item-opener" onclick="openItem(event)">↓</div>API Versionning should be carefully handled<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_indus1"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="indus1" id="indus1" value="5"></div><label for="indus1"><div class="item-opener" onclick="openItem(event)">↓</div>New versions should be packaged from Continuous Integration<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_indus2"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="indus2" id="indus2" value="5"></div><label for="indus2"><div class="item-opener" onclick="openItem(event)">↓</div>Use of GIT (or mercurial)<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_indus3"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="indus3" id="indus3" value="5"></div><label for="indus3"><div class="item-opener" onclick="openItem(event)">↓</div>Database versionning should be handled carefully (applying updates or rollbacking versions should be handled)<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_indus4"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="indus4" id="indus4" value="5"></div><label for="indus4"><div class="item-opener" onclick="openItem(event)">↓</div>API should be 100% tested with unit tests<span class="item-description">undefined</span></label></div><div class="item recommanded" id="item_indus5"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="indus5" id="indus5" value="3"></div><label for="indus5"><div class="item-opener" onclick="openItem(event)">↓</div>The whole solution should be easy to install and deploy<span class="item-description">undefined</span></label></div><div class="item recommanded" id="item_indus6"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="indus6" id="indus6" value="3"></div><label for="indus6"><div class="item-opener" onclick="openItem(event)">↓</div>Application should support Docker<span class="item-description">undefined</span></label></div><div class="item recommanded" id="item_indus7"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="indus7" id="indus7" value="3"></div><label for="indus7"><div class="item-opener" onclick="openItem(event)">↓</div>Each version should be easy to rebuild and redeploy (for emergency fixes or to debug locally)<span class="item-description">undefined</span></label></div><h2>Deploy</h2><div class="item mandatory" id="item_dep0"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="dep0" id="dep0" value="5"></div><label for="dep0"><div class="item-opener" onclick="openItem(event)">↓</div>Every deploy should have a changelog<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_dep1"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="dep1" id="dep1" value="5"></div><label for="dep1"><div class="item-opener" onclick="openItem(event)">↓</div>Documentation<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_dep2"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="dep2" id="dep2" value="5"></div><label for="dep2"><div class="item-opener" onclick="openItem(event)">↓</div>Database should be backuped and restore procedure should be tested<span class="item-description">undefined</span></label></div><div class="item mandatory" id="item_dep3"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="dep3" id="dep3" value="5"></div><label for="dep3"><div class="item-opener" onclick="openItem(event)">↓</div>Swagger up-to-date with meaningfull examples<span class="item-description">undefined</span></label></div><div class="item recommanded" id="item_dep4"><div class="item-checkbox"><input type="checkbox" onchange="handleChecking(event)" name="dep4" id="dep4" value="3"></div><label for="dep4"><div class="item-opener" onclick="openItem(event)">↓</div>Application rollback procedure written and tested for each deploy<span class="item-description">undefined</span></label></div></div>
         <input type="submit" value="Rate my backend">
     </form>
 
@@ -380,7 +182,202 @@
                 }
             }
         }
-    </script>
-</body>
 
-</html>
+        function openItem(event) {
+            event.stopPropagation();
+            event.preventDefault();
+            if (event.target.parentNode.parentNode.className.indexOf('opened') > -1) {
+                event.target.parentNode.parentNode.className = event.target.parentNode.parentNode.className.replace(' opened', '')
+            } else {
+                event.target.parentNode.parentNode.className += ' opened';
+            }
+        }
+    </script>
+    <script class="to_remove">
+        var ITEM_LEVEL = {
+            MANDATORY: 5,
+            RECOMMANDED: 3,
+            NICE_TO_HAVE: 1
+        };
+
+        var ratingItems = [
+            {
+                label: 'Monitoring',
+                id: 'mon',
+                children: [
+                    {
+                        label: 'Load balancing monitoring',
+                        value: ITEM_LEVEL.MANDATORY,
+                        description: 'Here a very good description and what if I write a very very long description on multiple big big lines???'
+                    },
+                    {
+                        label: 'Per API endpoint response time',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Per server resources monitoring (CPU, RAM, Disk Space, etc…)',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Setup alerts for all previous points',
+                        value: ITEM_LEVEL.NICE_TO_HAVE
+                    },
+                    {
+                        label: 'Use asynchronous logging in code',
+                        value: ITEM_LEVEL.NICE_TO_HAVE
+                    }
+                ]
+            },
+            {
+                label: 'Security',
+                id: 'sec',
+                children: [
+                    {
+                        label: 'User’s input sanitization',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Do not store plain text password',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Per API endpoint throttling (mainly login, file uploading, etc…)',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Prefer using BCrypt to hash password',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    }
+                ]
+            },
+            {
+                label: 'Performance optimization',
+                id: 'perf',
+                children: [
+                    {
+                        label: 'Database indexes',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Code Profiling to track down memory leaks',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Use NGinX or Varnish to cache static API requests (not logged users)',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Use Redis to cache dynamic API requests (logged users)',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Use of Redis, no read should be done to the database directly',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Use CDN to serve static files',
+                        value: ITEM_LEVEL.NICE_TO_HAVE
+                    }
+                ]
+            },
+            {
+                label: 'Industrialization',
+                id: 'indus',
+                children: [
+                    {
+                        label: 'API Versionning should be carefully handled',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'New versions should be packaged from Continuous Integration',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Use of GIT (or mercurial)',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Database versionning should be handled carefully (applying updates or rollbacking versions should be handled)',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'API should be 100% tested with unit tests',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'The whole solution should be easy to install and deploy',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Application should support Docker',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    },
+                    {
+                        label: 'Each version should be easy to rebuild and redeploy (for emergency fixes or to debug locally)',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    }
+                ]
+            },
+            {
+                label: 'Deploy',
+                id: 'dep',
+                children: [
+                    {
+                        label: 'Every deploy should have a changelog',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Documentation',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Database should be backuped and restore procedure should be tested',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Swagger up-to-date with meaningfull examples',
+                        value: ITEM_LEVEL.MANDATORY
+                    },
+                    {
+                        label: 'Application rollback procedure written and tested for each deploy',
+                        value: ITEM_LEVEL.RECOMMANDED
+                    }
+                ]
+            },
+        ];
+        var ratingItemsListElement = document.getElementById('ratingItemsList');
+        for (var i = 0; i < ratingItems.length; i++) {
+            var newCategoryTitle = document.createElement('h2');
+            newCategoryTitle.innerText = ratingItems[i].label;
+            ratingItemsListElement.appendChild(newCategoryTitle);
+            for (var j = 0; j < ratingItems[i].children.length; j++) {
+                var newRatingItem = document.createElement('div');
+                var currentId = ratingItems[i].id + j;
+                newRatingItem.className = 'item';
+                newRatingItem.id = 'item_' + currentId;
+                if (ratingItems[i].children[j].value === ITEM_LEVEL.MANDATORY) {
+                    newRatingItem.className += ' mandatory';
+                } else if (ratingItems[i].children[j].value === ITEM_LEVEL.RECOMMANDED) {
+                    newRatingItem.className += ' recommanded';
+                }
+                var newRatingItemCheckbox = document.createElement('div');
+                newRatingItemCheckbox.className = 'item-checkbox';
+                newRatingItemCheckbox.innerHTML = '<input type="checkbox" onchange="handleChecking(event)" name="' + currentId + '" id="' + currentId + '" value="' + ratingItems[i].children[j].value + '" />';
+                newRatingItem.appendChild(newRatingItemCheckbox);
+                var newRatingItemLabel = document.createElement('label');
+                newRatingItemLabel.setAttribute('for', currentId);
+                newRatingItemLabel.innerHTML = '<div class="item-opener" onclick="openItem(event)">&darr;</div>' + ratingItems[i].children[j].label;
+                var newRatingItemDescription = document.createElement('span');
+                newRatingItemDescription.className = 'item-description';
+                newRatingItemDescription.innerText = ratingItems[i].children[j].description;
+                newRatingItemLabel.appendChild(newRatingItemDescription);
+                newRatingItem.appendChild(newRatingItemLabel);
+                ratingItemsListElement.appendChild(newRatingItem);
+
+                maxScore += ratingItems[i].children[j].value;
+            }
+        }
+    </script>
+
+
+</body></html>
